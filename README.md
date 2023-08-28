@@ -1,14 +1,5 @@
 # Digital Library Book Tracker
 
-## Table of Contents
-
-- [Description](#description)
-- [Features](#features)
-- [Entities](#entities)
-- [Database](#database)
-- [Functionality](#functionality)
-- [Usage](#usage)
-
 ## Description
 
 The Digital Library Book Tracker is a web application designed to facilitate the transition of book management in local libraries to a digital platform. This project utilizes Hibernate and Spring Data JPA, providing librarians with a comprehensive tool to manage readers, track book borrowing, and streamline administrative tasks. The application also includes advanced features such as pagination, sorting, searching, and overdue book checks.
