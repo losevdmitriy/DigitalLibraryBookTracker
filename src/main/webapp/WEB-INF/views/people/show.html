@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+</head>
+<body>
+<div style="text-align: left; margin-top: auto; margin-left: auto">
+    <p>
+        <strong>ID:</strong> <span th:text="${person.getId()}">VALUE</span>
+        <br>
+        <strong>Name:</strong> <span th:text="${person.getName()}">VALUE</span>
+        <br>
+        <strong>Birth Year:</strong> <span th:text="${person.getBirth_year()}">VALUE</span>
+    </p>
+    <form style="display: inline-block;" th:method="DELETE" th:action="@{/library/people/{id}(id=${person.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+    <form style="display: inline-block;" th:action="@{/library/people/{id}/edit(id=${person.getId()})}">
+        <button type="submit">Edit</button>
+    </form>
+    <br>
+    <br>
+    <strong>Taken books: </strong>
+    <br>
+
+    <div th:if="${books.isEmpty()}">
+        <div>This person hasn't picked up any books yet</div>
+    </div>
+
+    <div th:unless="${books.isEmpty()}">
+        <div th:each="book : ${books}">
+            <a th:href="@{/library/books/{id} (id=${book.getId})}"
+               th:text="${book.getName()+', '+book.getAuthor()+', '+book.getYear()}"
+               th:style="${book.isExpired ? 'color: red;' : ''}">user</a>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<div>
+    <p>
+    <form th:action="@{/library/books/search}" method="get">
+        <label for="titleFromBackEnd">Enter a search query: </label>
+        <input type="text" name="query" th:value="${query}" id="titleFromBackEnd"/>
+
+        <input type="submit" value="Search">
+    </form>
+    </p>
+</div>
+
+
+<div th:each="book : ${searchResults}">
+    <a th:href="@{/library/books/{id} (id=${book.getId})}"
+       th:text="${book.getName()+', '+book.getAuthor()+', '+book.getYear()}">user</a>
+</div>
+
+</body>
+</html>

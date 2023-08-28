@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+<div style="text-align: left; margin-top: auto; margin-left: auto">
+    <p>
+        <strong>ID:</strong> <span th:text="${book.getId()}">VALUE</span>
+        <br>
+        <strong>Name:</strong> <span th:text="${book.getName()}">VALUE</span>
+        <br>
+        <strong>Author:</strong> <span th:text="${book.getAuthor()}">VALUE</span>
+        <br>
+        <strong>Year:</strong> <span th:text="${book.getYear()}">VALUE</span>
+    </p>
+    <form style="display: inline-block;" th:method="DELETE" th:action="@{/library/books/{id}(id=${book.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+    <form style="display: inline-block;" th:action="@{/library/books/{id}/edit(id=${book.getId()})}">
+        <button type="submit">Edit</button>
+    </form>
+    <br>
+    <br>
+    <div th:if="${person==null}">
+        <div>This book is available. Who to give the book to?</div>
+
+        <form th:action="@{/library/books/issue/{id}(id=${book.getId()})}" method="post">
+            Select person:
+            <select name="person">
+                <option th:each="person : ${people}" th:value="${person.getId()}"
+                        th:text="${person.getName()}"></option>
+            </select>
+            <input type="submit" value="Give">
+        </form>
+    </div>
+
+    <div th:if="${!(person.name==null)}">
+        Got the book:
+        <a th:href="@{/library/people/{id} (id=${person.getId})}"
+           th:text="${person.getName()}">user</a>
+
+        <form style="display: inline-block;" th:method="POST"
+              th:action="@{/library/books/return/{id}(id=${book.getId()})}">
+            <input type="submit" value="Return the book"/>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
